@@ -1,0 +1,36 @@
+<nav>
+  <a routerLink="/rick-and-morty" *ngIf="isLoggedIn()">Rick & Morty</a>
+  <a routerLink="/nasa" *ngIf="isLoggedIn()">NASA</a>
+  <button (click)="login()" *ngIf="!isLoggedIn()">Login</button>
+  <button (click)="logout()" *ngIf="isLoggedIn()">Logout</button>
+</nav>
+
+<section>
+  <h2>Personnages Rick et Morty</h2>
+  <div *ngIf="characters.length; else loadingRick">
+    <div *ngFor="let character of characters" style="margin-bottom: 1rem;">
+      <h3>{{ character.name }}</h3>
+      <img [src]="character.image" [alt]="character.name" style="width: 120px; border-radius: 1rem;" />
+      <p>Espèce : {{ character.species }}</p>
+      <p>Statut : {{ character.status }}</p>
+    </div>
+  </div>
+  <ng-template #loadingRick>
+    <p>Chargement des personnages...</p>
+  </ng-template>
+</section>
+
+<section style="margin-top: 3rem;">
+  <h2>Image du jour - NASA</h2>
+  <div *ngIf="nasaData; else loadingNasa">
+    <h3>{{ nasaData.title }}</h3>
+    <img [src]="nasaData.url" [alt]="nasaData.title" style="max-width: 100%; border-radius: 1rem;" *ngIf="nasaData.media_type === 'image'" />
+    <p>{{ nasaData.explanation }}</p>
+  </div>
+  <ng-template #loadingNasa>
+    <p>Chargement de l'image de la NASA...</p>
+  </ng-template>
+</section>
+
+
+<router-outlet></router-outlet>
