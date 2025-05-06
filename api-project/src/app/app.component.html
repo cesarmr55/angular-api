@@ -1,7 +1,7 @@
 <nav>
   <a routerLink="/rick-and-morty" *ngIf="isLoggedIn()">Rick & Morty</a>
   <a routerLink="/nasa" *ngIf="isLoggedIn()">NASA</a>
-  <button (click)="login()" *ngIf="!isLoggedIn()">Login</button>
+  <a routerLink="/login" *ngIf="!isLoggedIn()">Login</a>
   <button (click)="logout()" *ngIf="isLoggedIn()">Logout</button>
 </nav>
 
@@ -24,13 +24,12 @@
   <h2>Image du jour - NASA</h2>
   <div *ngIf="nasaData; else loadingNasa">
     <h3>{{ nasaData.title }}</h3>
-    <img [src]="nasaData.url" [alt]="nasaData.title" style="max-width: 100%; border-radius: 1rem;" *ngIf="nasaData.media_type === 'image'" />
+    <img *ngIf="nasaData.media_type === 'image'" [src]="nasaData.url" [alt]="nasaData.title" style="max-width: 100%; border-radius: 1rem;" />
     <p>{{ nasaData.explanation }}</p>
   </div>
   <ng-template #loadingNasa>
     <p>Chargement de l'image de la NASA...</p>
   </ng-template>
 </section>
-
 
 <router-outlet></router-outlet>
