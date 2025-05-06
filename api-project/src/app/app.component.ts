@@ -23,28 +23,7 @@ export class AppComponent implements OnInit {
     this.getRickAndMortyCharacters();
     this.getNasaImageOfTheDay();
   }
-
-  login() {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('token', 'fake-jwt-token');
-    }
-  }
   
-  logout() {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('token');
-    }
-  }
-  
-
-  isLoggedIn(): boolean {
-    if (typeof window !== 'undefined') {
-      return !!localStorage.getItem('token');
-    }
-    return false;
-  }
-  
-
   getRickAndMortyCharacters() {
     this.http.get<any>('https://rickandmortyapi.com/api/character')
       .subscribe(data => {
